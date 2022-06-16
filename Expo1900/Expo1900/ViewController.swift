@@ -84,12 +84,16 @@ class ViewController: UIViewController {
         return scroll
     }()
     
-    private let button: UIButton = {
+    // MARK: - Button
+    // 경고를 없애기 위해 lazy로 선언
+    private lazy var button: UIButton = {
         let button = UIButton()
         button.setTitle("한국의 출품작 보러가기", for: .normal)
         // 색변경
         button.setTitleColor(UIColor.link, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        // 버튼 이벤트 추가
+        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
         return button
     }()
     
@@ -174,6 +178,18 @@ class ViewController: UIViewController {
         venueLabel.text = "개최지 : \(expositionData!.location)"
         periodLabel.text = "개최 기간: \(expositionData!.duration)"
         descriptionLabel.text = expositionData?.description
+    }
+    
+    // MARK: - Button Action
+    @objc func buttonAction(sender: UIButton!) {
+        print("")
+        print("===============================")
+        print("[A_Nice >> buttonAction() :: 버튼 클릭 수행 실시]")
+        print("===============================")
+        print("")
+        
+        let rootView = RootViewController()
+        self.present(rootView, animated: true)
     }
 }
 
