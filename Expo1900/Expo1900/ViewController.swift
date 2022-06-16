@@ -182,14 +182,11 @@ class ViewController: UIViewController {
     
     // MARK: - Button Action
     @objc func buttonAction(sender: UIButton!) {
-        print("")
-        print("===============================")
-        print("[A_Nice >> buttonAction() :: 버튼 클릭 수행 실시]")
-        print("===============================")
-        print("")
-        
         let rootView = RootViewController()
-        self.present(rootView, animated: true)
+        // self.present(rootView, animated: true)
+        
+        // UIViewController로 변경해서 해결!
+        self.navigationController?.pushViewController(rootView, animated: true)
     }
 }
 

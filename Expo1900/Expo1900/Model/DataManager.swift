@@ -8,7 +8,7 @@
 import Foundation
 
 struct DataManager {
-    func load(fileName: String) -> Data? {
+    private func load(fileName: String) -> Data? {
         guard let fileLocation = Bundle.main.url(forResource: fileName, withExtension: "json") else {
             return nil
         }
