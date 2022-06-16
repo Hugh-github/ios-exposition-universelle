@@ -10,6 +10,7 @@ class ViewController: UIViewController {
 
     let expositionData = DataManager().expositionParse(fileName: "exposition_universelle_1900")
 
+    // MARK: - Create UI
     private let stackView: UIStackView = {
         let stack = UIStackView()
         stack.alignment = .center
@@ -86,8 +87,8 @@ class ViewController: UIViewController {
     private let button: UIButton = {
         let button = UIButton()
         button.setTitle("한국의 출품작 보러가기", for: .normal)
-        button.tintColor = .blue
-        button.backgroundColor = .blue
+        // 색변경
+        button.setTitleColor(UIColor.link, for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -106,23 +107,21 @@ class ViewController: UIViewController {
         return image
     }()
     
+    // MARK: - View life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setScrollView()
         updateText()
     }
 
+    // MARK: - Setting View
     private func setScrollView() {
         self.view.addSubview(scrollView)
-        setScrollViewLayout()
         
         scrollView.addSubview(stackView)
-        //scrollView.addSubview(subStackView)
-        setStackViewLayout()
-        
+
         stackView.addArrangedSubview(titleLabel)
         stackView.addArrangedSubview(imageView)
-        setImageViewLayout()
         stackView.addArrangedSubview(visitorLabel)
         stackView.addArrangedSubview(venueLabel)
         stackView.addArrangedSubview(periodLabel)
@@ -132,6 +131,10 @@ class ViewController: UIViewController {
         subStackView.addArrangedSubview(leftFlagImageView)
         subStackView.addArrangedSubview(button)
         subStackView.addArrangedSubview(rightFlagImageView)
+        
+        setScrollViewLayout()
+        setStackViewLayout()
+        setImageViewLayout()
     }
     
     private func setScrollViewLayout() {
@@ -148,24 +151,21 @@ class ViewController: UIViewController {
         stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 5).isActive = true
         stackView.centerXAnchor.constraint(equalTo: scrollView.centerXAnchor).isActive = true
         
-        subStackView.heightAnchor.constraint(equalToConstant: 25).isActive = true
-        //subStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor).isActive = true
-        //subStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor).isActive = true
+        subStackView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
-        //button.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        // 양 옆에 공백 추가
+        subStackView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.8).isActive = true
     }
     
     private func setImageViewLayout() {
         imageView.widthAnchor.constraint(equalTo: stackView.widthAnchor, multiplier: 0.4).isActive = true
         imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1.6).isActive = true
         
-//        leftFlagImageView.widthAnchor.constraint(equalTo: subStackView.widthAnchor, multiplier: 0.2).isActive = true
-//        leftFlagImageView.heightAnchor.constraint(equalTo: leftFlagImageView.widthAnchor, multiplier: 0.5).isActive = true
-//        
-//        rightFlagImageView.widthAnchor.constraint(equalTo: leftFlagImageView.widthAnchor).isActive = true
-//        rightFlagImageView.heightAnchor.constraint(equalTo: leftFlagImageView.heightAnchor).isActive = true
+        leftFlagImageView.widthAnchor.constraint(equalTo: subStackView.widthAnchor, multiplier: 0.2).isActive = true
+        rightFlagImageView.widthAnchor.constraint(equalTo: leftFlagImageView.widthAnchor).isActive = true
     }
     
+    // MARK: - Update UI Text
     private func updateText() {
         let title = expositionData!.title.replacingOccurrences(of: "(", with: "\n(")
         
