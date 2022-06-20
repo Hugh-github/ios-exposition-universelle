@@ -81,8 +81,8 @@ class MainViewItem: UIView {
         scroll.backgroundColor = .white
         return scroll
     }()
-    
-    private let button: UIButton = {
+
+    let button: UIButton = {
         let button = UIButton()
         button.setTitle("한국의 출품작 보러가기", for: .normal)
         button.setTitleColor(UIColor.link, for: .normal)
